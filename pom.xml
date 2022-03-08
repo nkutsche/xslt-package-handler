@@ -12,6 +12,7 @@
         <module>xslt-pkg-manager100</module>
         <module>xslt-pkg-manager110</module>
         <module>xslt-pkg-manager99</module>
+        <module>xslt-pkg-mangaer-core</module>
     </modules>
     <packaging>pom</packaging>
 
