@@ -7,6 +7,9 @@
     <groupId>com.nkutsche</groupId>
     <artifactId>xslt-package-handler</artifactId>
     <version>1.0.0-SNAPSHOT</version>
+    
+    <name>XSLT Package Handler</name>
+    <description>This project provides a Maven based framework to wrap XSLT packages in jar files and refind them in the classpath for Saxon XSLT processor.</description>
     <modules>
         <module>maven-plugin</module>
         <module>xslt-pkg-manager100</module>
