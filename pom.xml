@@ -18,6 +18,25 @@
             <url>LICENSE</url>
         </license>
     </licenses>
+    
+    <developers>
+        <developer>
+            <id>nkutsche</id>
+            <name>Nico Kutscherauer</name>
+            <email>nico@nkutsche.com</email>
+        </developer>
+    </developers>
+    
+    
+    <url>https://github.com/nkutsche/xslt-package-handler</url>
+    
+    <scm>
+        <connection>scm:git:https://github.com/nkutsche/xslt-package-handler.git</connection>
+        <url>https://github.com/nkutsche/xslt-package-handler</url>
+        <developerConnection>scm:git:https://github.com/nkutsche/xslt-package-handler.git</developerConnection>
+        <tag>HEAD</tag>
+    </scm>
+    
     <modules>
         <module>maven-plugin</module>
         <module>xslt-pkg-manager100</module>
