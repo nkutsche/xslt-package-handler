@@ -2,6 +2,11 @@
 
 This project provides a Maven based framework to wrap XSLT packages in jar files and refind them in the classpath.
 
+## Release notes
+
+### 1.0.0
+
+* First public release
 
 ## Challenge to be Target
 
