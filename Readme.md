@@ -30,7 +30,7 @@ The first task is to store the location of the XSLT package on a place where it 
 <plugin>
     <groupId>com.nkutsche</groupId>
     <artifactId>xslt-pkg-maven-plugin</artifactId>
-    <version>1.0.0-SNAPSHOT</version>
+    <version>1.0.0</version>
     <executions>
         <execution>
             <goals>
@@ -52,7 +52,7 @@ As the jar archives in the Java classpath can not be browsable you need at first
 <plugin>
     <groupId>com.nkutsche</groupId>
     <artifactId>xslt-pkg-maven-plugin</artifactId>
-    <version>1.0.0-SNAPSHOT</version>
+    <version>1.0.0</version>
     <executions>
         <execution>
             <goals>
@@ -70,7 +70,7 @@ Add the following dependency to the pom.xml of `com.example:main:1.0`:
 <dependency>
     <groupId>com.nkutsche</groupId>
     <artifactId>xslt-pkg-managerXXX</artifactId>
-    <version>1.0.0-SNAPSHOT</version>
+    <version>1.0.0</version>
 </dependency>
 
 Use for `XXX` the values `99`, `100` or `110` depending on the Saxon version you want to use - `9.x`, `10.x` or `11.x`. *Note:* this dependency does not provide the Saxon final version. It was just compiled with interface classes from different Saxon major versions.
