@@ -10,6 +10,14 @@
     
     <name>XSLT Package Handler</name>
     <description>This project provides a Maven based framework to wrap XSLT packages in jar files and refind them in the classpath for Saxon XSLT processor.</description>
+    
+    
+    <licenses>
+        <license>
+            <name>MIT License</name>
+            <url>LICENSE</url>
+        </license>
+    </licenses>
     <modules>
         <module>maven-plugin</module>
         <module>xslt-pkg-manager100</module>
