@@ -36,6 +36,12 @@
             <artifactId>xslt-pkg-manager-core</artifactId>
             <version>${project.version}</version>
         </dependency>
+        <dependency>
+            <groupId>com.xmlcalabash</groupId>
+            <artifactId>xmlcalabash</artifactId>
+            <version>1.2.3-100</version>
+            <scope>provided</scope>
+        </dependency>
 
     </dependencies>
 
