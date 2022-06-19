@@ -1,0 +1,145 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
+                      http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    
+    <groupId>com.nkutsche.example</groupId>
+    <artifactId>main</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    
+    <properties>
+        <assembly.dir>${project.basedir}/src/assembly</assembly.dir>
+        
+        <cli.command>pkgtest</cli.command>
+        
+        <appassembler.class>net.sf.saxon.Transform</appassembler.class>
+        
+        <xpath.model.version>1.0.0-SNAPSHOT</xpath.model.version>
+        <schema.info.nav.version>1.0.0-SNAPSHOT</schema.info.nav.version>
+        
+    </properties>
+    
+    <dependencies>
+        <dependency>
+            <groupId>com.nkutsche.example</groupId>
+            <artifactId>lib</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>top.marchand.xml</groupId>
+            <artifactId>cp-protocol</artifactId>
+            <version>2.1</version>
+        </dependency>
+        <dependency>
+            <groupId>net.sf.saxon</groupId>
+            <artifactId>Saxon-HE</artifactId>
+            <version>${saxon.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.xmlcalabash</groupId>
+            <artifactId>xmlcalabash</artifactId>
+            <version>${calabash.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.nkutsche</groupId>
+            <artifactId>xslt-pkg-manager${saxon.major.version}</artifactId>
+            <version>2.0.0-SNAPSHOT</version>
+        </dependency>
+    </dependencies>
+    
+    
+    <repositories>
+        <!--
+    some dependency of Calabash which is not on Maven Central
+    -->
+        <repository>
+            <id>spring</id>
+            <url>https://maven.restlet.org</url>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+        </repository>
+        
+    </repositories>
+    
+    
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>appassembler-maven-plugin</artifactId>
+                <version>1.10</version>
+                <configuration>
+                    <useWildcardClassPath>true</useWildcardClassPath>
+                    <repositoryLayout>flat</repositoryLayout>
+                    <programs>
+                        <program>
+                            <id>${cli.command}</id>
+                            <mainClass>${appassembler.class}</mainClass>
+                            <platforms>windows</platforms>
+                            <commandLineArguments>
+                                <commandLineArgument>-init:com.nkutsche.xslt.pkg.handler.PackageManager -it -u -xsl:cp:/main.xsl</commandLineArgument>
+                            </commandLineArguments>
+                            <jvmSettings>
+                                <systemProperties>
+                                    <systemProperty>java.protocol.handler.pkgs=top.marchand.xml.protocols</systemProperty>
+                                </systemProperties>
+                            </jvmSettings>
+                        </program>
+                        <program>
+                            <id>${cli.command}.sh</id>
+                            <mainClass>${appassembler.class}</mainClass>
+                            <platforms>unix</platforms>
+                            <commandLineArguments>
+                                <commandLineArgument>-init:com.nkutsche.xslt.pkg.handler.PackageManager -it -u -config:cp:/cfg/saxon-config.xml -xsl:cp:/main.xsl</commandLineArgument>
+                            </commandLineArguments>
+                            <jvmSettings>
+                                <systemProperties>
+                                    <systemProperty>java.protocol.handler.pkgs=top.marchand.xml.protocols</systemProperty>
+                                </systemProperties>
+                            </jvmSettings>
+                        </program>
+                    </programs>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>create-app</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>assemble</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+    
+    <profiles>
+        <profile>
+            <id>100</id>
+            <properties>
+                <saxon.version>10.6</saxon.version>
+                <calabash.version>1.2.3-100</calabash.version>
+                <saxon.major.version>100</saxon.major.version>
+            </properties>
+        </profile>
+        <profile>
+            <id>110</id>
+            <properties>
+                <saxon.version>11.3</saxon.version>
+                <calabash.version>1.2.3-100</calabash.version>
+                <saxon.major.version>110</saxon.major.version>
+            </properties>
+        </profile>
+        <profile>
+            <id>99</id>
+            <properties>
+                <saxon.version>9.9.1-8</saxon.version>
+                <calabash.version>1.2.3-99</calabash.version>
+                <saxon.major.version>99</saxon.major.version>
+            </properties>
+        </profile>
+    </profiles>
+    
+</project>

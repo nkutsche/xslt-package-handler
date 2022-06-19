@@ -120,6 +120,10 @@ java -Dcom.xmlcalabash.xproc-configurer=com.nkutsche.xslt.pkg.handler.XProcConfi
 
 **Note:** Since there is until now no Calabash version compatible to Saxon 11.x, the configurer is not implemented yet for the `xslt-pkg-manager110` module.
 
+### Sample Project
+
+Find [here](sample/sample-project/) a working sample project.
+
 ## How it works
 
 ### Goal `package-info`

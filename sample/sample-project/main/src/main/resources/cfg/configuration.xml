@@ -1,0 +1,3 @@
+<xproc-config xmlns="http://xmlcalabash.com/ns/configuration">
+    <xproc-configurer class-name="com.nkutsche.xslt.pkg.handler.XProcConfigurer"/>
+</xproc-config>
