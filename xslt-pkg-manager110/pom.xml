@@ -34,8 +34,8 @@
 
         <dependency>
             <groupId>com.nkutsche</groupId>
-            <artifactId>xslt-pkg-mangaer-core</artifactId>
-            <version>1.0.1-SNAPSHOT</version>
+            <artifactId>xslt-pkg-manager-core</artifactId>
+            <version>${project.version}</version>
         </dependency>
 
     </dependencies>
