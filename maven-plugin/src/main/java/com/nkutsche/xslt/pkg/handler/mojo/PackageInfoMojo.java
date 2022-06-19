@@ -7,9 +7,13 @@ import org.apache.maven.plugins.annotations.LifecyclePhase;
 import org.apache.maven.plugins.annotations.Mojo;
 import org.apache.maven.plugins.annotations.Parameter;
 import org.apache.maven.project.MavenProject;
+import static com.nkutsche.xslt.pkg.handler.PackageFinder.*;
 
 import java.io.*;
-import java.util.Properties;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 @Mojo(name = "package-info", defaultPhase = LifecyclePhase.GENERATE_RESOURCES)
 public class PackageInfoMojo extends AbstractMojo {
@@ -20,32 +24,54 @@ public class PackageInfoMojo extends AbstractMojo {
     @Parameter(defaultValue = "${project.build.directory}/classes")
     public File outDir;
 
-    @Parameter(defaultValue = "META-INF/xslt/${project.groupId}/${project.artifactId}/packages", readonly = true, required = true)
+    @Parameter(defaultValue = PACKAGE_INFO_PATH, readonly = true, required = true)
     public String filepath;
 
-    @Parameter(required = true)
+    @Parameter
     public String packagePath;
+
+    @Parameter
+    public String[] packagePaths;
 
 
     public void execute() throws MojoExecutionException, MojoFailureException {
-        String groupId = project.getGroupId();
-        String artifactId = project.getArtifactId();
 
+        if(packagePath != null){
+            if(packagePaths == null){
+                packagePaths = new String[]{packagePath};
+            } else {
+                throw new MojoExecutionException("Specify either <packagePath> or <packagePaths> not both!");
+            }
+        }
 
-        Properties properties = new Properties();
-        properties.setProperty(groupId + "." + artifactId, packagePath);
+        if(packagePaths == null){
+            throw new MojoExecutionException("Specify the path to your package library by <packagePath> or <packagePaths>!");
+        }
 
         File outFile = new File(outDir, filepath);
 
-        if(!outFile.getParentFile().exists()){
-            outFile.getParentFile().mkdirs();
-        }
-
-        try {
-            properties.store(new FileOutputStream(outFile), null);
-        } catch (IOException e) {
-            throw new MojoFailureException(e.getMessage());
-        }
+        writePackageInfo(packagePaths, outFile);
 
     }
+
+    private void writePackageInfo(String[] packagePaths, File outFile) throws MojoExecutionException {
+        BufferedWriter writer = null;
+        try {
+            if(!outFile.getParentFile().exists()){
+                outFile.getParentFile().mkdirs();
+            }
+            Path path = Paths.get(outFile.toURI());
+            writer = Files.newBufferedWriter(path, StandardCharsets.UTF_8);
+
+            for (String line:
+                    packagePaths) {
+                writer.write(line);
+                writer.newLine();
+            }
+            writer.close();
+        } catch (IOException e) {
+            throw new MojoExecutionException(e.getMessage());
+        }
+    }
+
 }

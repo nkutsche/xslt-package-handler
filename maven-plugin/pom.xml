@@ -38,6 +38,12 @@
             <artifactId>maven-dependency-tree</artifactId>
             <version>3.0</version>
         </dependency>
+        <dependency>
+            <groupId>com.nkutsche</groupId>
+            <artifactId>xslt-pkg-manager-core</artifactId>
+            <version>${project.version}</version>
+            <scope>compile</scope>
+        </dependency>
     </dependencies>
 
 </project>
