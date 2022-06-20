@@ -6,7 +6,7 @@ This project provides a Maven based framework to wrap XSLT packages in jar files
 
 ### 2.0.0
 
-* Redesign of the concept, skip unused mojo for using project.
+* Redesign of the concept, skip unnecessary Maven plugin mojo for the using project.
 * Adds Configurer classes for XProc/Calabash integration
 * Adds possibility to specifify multiple packages in one module.
 
@@ -70,6 +70,7 @@ The first task is to store the location of the XSLT package on a place where it 
 
 Add the following dependencies to the pom.xml of `com.example:main:1.0`:
 
+```xml
 <!-- The dependency to your basic project -->
 <dependency>
     <groupId>com.nkutsche</groupId>
@@ -80,14 +81,16 @@ Add the following dependencies to the pom.xml of `com.example:main:1.0`:
 <dependency>
     <groupId>com.nkutsche</groupId>
     <artifactId>xslt-pkg-managerXXX</artifactId>
-    <version>1.0.0</version>
+    <version>2.0.0</version>
 </dependency>
 <!-- other dependencies like Saxon, Calabash, etc. -->
+```
 
+**Note:**
 
-Use for `XXX` the values `99`, `100` or `110` depending on the Saxon version you want to use - `9.x`, `10.x` or `11.x`. 
+* Use for `XXX` the values `99`, `100` or `110` depending on the Saxon version you want to use - `9.x`, `10.x` or `11.x`. 
 
-**Note:** this dependency does not provide the Saxon final version. It was just compiled with interface classes from different Saxon major versions. You need to add Saxon (or e.g. Calabash) as dependency by your self.
+* this dependency does not provide the Saxon final version. It was just compiled with interface classes from different Saxon major versions. You need to add Saxon (or e.g. Calabash) as dependency by your self.
 
 For creating the execution classpath you can use any way you like. Just add all jars from your project inclusive project jar. With Maven I often use the `appassembler-maven-plugin` or the `exec-maven-plugin`.
 
@@ -104,7 +107,7 @@ mvn exec:exec -Dexec.executable="java" -Dexec.args="-cp %%classpath net.sf.saxon
 
 ### XML Calabash Call
 
-Since xslt-pkg-manager 2.0.0 there is also integration classes for Calabash to use it in XProc. To enable the XSLT Packages for Calabash you have to use the configuration option `xproc-configurer`. In the Calabash configuration file it would look like this:
+Since xslt-pkg-manager 2.0.0 there is also integration classes for Calabash to use it in XProc. To enable the XSLT Packages for Calabash you have to specify the class `com.nkutsche.xslt.pkg.handler.XProcConfigurer` as XProc configurer using the configuration option `xproc-configurer`. In the Calabash configuration file it would look like this:
 
 ```xml
 <xproc-config xmlns="http://xmlcalabash.com/ns/configuration">
@@ -118,7 +121,7 @@ On the Calabash CLI it is possible by setting the specific system property:
 java -Dcom.xmlcalabash.xproc-configurer=com.nkutsche.xslt.pkg.handler.XProcConfigurer ...
 ```
 
-**Note:** Since there is until now no Calabash version compatible to Saxon 11.x, the configurer is not implemented yet for the `xslt-pkg-manager110` module.
+**Note:** As there is until now no Calabash version compatible to Saxon 11.x, the configurer is not implemented yet for the `xslt-pkg-manager110` module.
 
 ### Sample Project
 
@@ -138,7 +141,7 @@ This is everything what to do in the project `com.example:lib:1.0`.
 
 ### Saxon initializer | XProc configurer
 
-The Saxon initializer or XProc configurer searches in each jar file of the current classpath for files with the path `/META-INF/xslt/com.nkutsche.xslt.packages`. So it finds all available XSLT packages. By parsing the files it identifies the package names and versions and notifies Saxon about it.
+The Saxon initializer or XProc configurer searches in each jar file of the current classpath for files with the path `/META-INF/xslt/com.nkutsche.xslt.packages`. So it finds all available XSLT packages. By parsing the XSLT files it identifies the package names and versions and notifies Saxon about it.
 
 
 
