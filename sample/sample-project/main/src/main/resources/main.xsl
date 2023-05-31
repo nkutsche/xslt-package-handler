@@ -8,9 +8,9 @@
     <xsl:use-package name="com.nkutsche.example.lib" package-version="1.0.0"/>
     
     <xsl:template name="xsl:initial-template">
-        <foo>
+        <root processor="{system-property('xsl:product-name')} {system-property('xsl:product-version')}">
             <xsl:sequence select="nk:foo()"/>
-        </foo>
+        </root>
     </xsl:template>
     
 </xsl:stylesheet>

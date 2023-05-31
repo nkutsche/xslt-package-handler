@@ -15,9 +15,6 @@
         
         <appassembler.class>net.sf.saxon.Transform</appassembler.class>
         
-        <xpath.model.version>1.0.0-SNAPSHOT</xpath.model.version>
-        <schema.info.nav.version>1.0.0-SNAPSHOT</schema.info.nav.version>
-        
     </properties>
     
     <dependencies>
@@ -127,8 +124,8 @@
         <profile>
             <id>110</id>
             <properties>
-                <saxon.version>11.3</saxon.version>
-                <calabash.version>1.2.3-100</calabash.version>
+                <saxon.version>11.5</saxon.version>
+                <calabash.version>1.5.6-110</calabash.version>
                 <saxon.major.version>110</saxon.major.version>
             </properties>
         </profile>
@@ -138,6 +135,14 @@
                 <saxon.version>9.9.1-8</saxon.version>
                 <calabash.version>1.2.3-99</calabash.version>
                 <saxon.major.version>99</saxon.major.version>
+            </properties>
+        </profile>
+        <profile>
+            <id>120</id>
+            <properties>
+                <saxon.version>12.2</saxon.version>
+                <calabash.version>1.5.6-120</calabash.version>
+                <saxon.major.version>120</saxon.major.version>
             </properties>
         </profile>
     </profiles>
