@@ -40,6 +40,7 @@
         <module>maven-plugin</module>
         <module>xslt-pkg-manager100</module>
         <module>xslt-pkg-manager110</module>
+        <module>xslt-pkg-manager120</module>
         <module>xslt-pkg-manager99</module>
     </modules>
     <packaging>pom</packaging>
