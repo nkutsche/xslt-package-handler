@@ -29,6 +29,8 @@ import java.util.StringTokenizer;
 
 class PackageFinder100 extends  PackageFinder<PackageDetails> {
 
+        private static PackageFinder100 packageFinder = null;
+
         private Configuration config;
 
         PackageFinder100(Configuration config){
@@ -115,9 +117,12 @@ class PackageFinder100 extends  PackageFinder<PackageDetails> {
         if(pkgLib == null){
             pkgLib = new PackageLibrary(compInfo);
         }
-        PackageFinder100 packageFinder = new PackageFinder100(config);
 
-        for (PackageDetails pkg: packageFinder.search()) {
+        if(packageFinder == null){
+            packageFinder = new PackageFinder100(config);
+        }
+
+        for (PackageDetails pkg: packageFinder.getPackages()) {
             pkgLib.addPackage(pkg);
         }
 

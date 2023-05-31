@@ -21,6 +21,9 @@ import java.io.IOException;
 import java.net.URL;
 
 public class PackageFinder99 extends  PackageFinder<PackageDetails> {
+
+    private static PackageFinder99 packageFinder = null;
+
     private Configuration config;
 
     PackageFinder99(Configuration config){
@@ -106,9 +109,12 @@ public class PackageFinder99 extends  PackageFinder<PackageDetails> {
         if(pkgLib == null){
             pkgLib = new PackageLibrary(compInfo);
         }
-        PackageFinder99 packageFinder = new PackageFinder99(config);
 
-        for (PackageDetails pkg: packageFinder.search()) {
+        if(packageFinder == null){
+            packageFinder = new PackageFinder99(config);
+        }
+
+        for (PackageDetails pkg: packageFinder.getPackages()) {
             pkgLib.addPackage(pkg);
         }
 

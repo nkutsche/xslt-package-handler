@@ -16,13 +16,21 @@ public abstract class PackageFinder<P> {
     public static final String PACKAGE_INFO_PATH = "META-INF/xslt/com.nkutsche.xslt.packages";
 
     private final ClassLoader classLoader;
+    private ArrayList<P> packages = null;
 
     public PackageFinder(ClassLoader classLoader){
 
         this.classLoader = classLoader;
     }
 
-    public ArrayList<P> search(){
+    public ArrayList<P> getPackages(){
+        if(packages == null){
+            packages = search();
+        }
+        return new ArrayList<>(packages);
+    }
+
+    private ArrayList<P> search(){
         ArrayList<P> packageList = new ArrayList<>();
         try {
             Enumeration<URL> packageInfos = classLoader.getResources(PACKAGE_INFO_PATH);
