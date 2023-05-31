@@ -4,6 +4,12 @@ This project provides a Maven based framework to wrap XSLT packages in jar files
 
 ## Release notes
 
+### 2.1.0 (SNAPSHOT)
+
+* Adds support for Saxon 12.
+* Performance optimization for Calabash Configurer 
+* Adds XProcConfigurers for Saxon 11 (and 12) based Calabash versions
+
 ### 2.0.0
 
 * Redesign of the concept, skip unnecessary Maven plugin mojo for the using project.
@@ -120,8 +126,6 @@ On the Calabash CLI it is possible by setting the specific system property:
 ```
 java -Dcom.xmlcalabash.xproc-configurer=com.nkutsche.xslt.pkg.handler.XProcConfigurer ...
 ```
-
-**Note:** As there is until now no Calabash version compatible to Saxon 11.x, the configurer is not implemented yet for the `xslt-pkg-manager110` module.
 
 ### Sample Project
 
