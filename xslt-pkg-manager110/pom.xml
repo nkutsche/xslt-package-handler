@@ -10,7 +10,7 @@
     <artifactId>xslt-pkg-manager110</artifactId>
 
     <properties>
-        <saxon.version>11.2</saxon.version>
+        <saxon.version>11.5</saxon.version>
         <maven.compiler.source>8</maven.compiler.source>
         <maven.compiler.target>8</maven.compiler.target>
     </properties>
