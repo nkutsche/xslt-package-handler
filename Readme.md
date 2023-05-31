@@ -4,7 +4,7 @@ This project provides a Maven based framework to wrap XSLT packages in jar files
 
 ## Release notes
 
-### 2.1.0 (SNAPSHOT)
+### 2.1.0
 
 * Adds support for Saxon 12.
 * Performance optimization for Calabash Configurer 
