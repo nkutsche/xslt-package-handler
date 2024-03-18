@@ -40,7 +40,8 @@ public abstract class PackageFinder<P> {
             }
 
         } catch (Exception e){
-
+            e.printStackTrace();
+            System.err.println(e.getMessage());
         }
 
         return packageList;
