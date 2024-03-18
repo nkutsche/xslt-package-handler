@@ -7,6 +7,8 @@ import net.sf.saxon.event.ProxyReceiver;
 import net.sf.saxon.event.Sender;
 import net.sf.saxon.event.Sink;
 import net.sf.saxon.lib.ParseOptions;
+import net.sf.saxon.lib.ResourceRequest;
+import net.sf.saxon.lib.ResourceResolver;
 import net.sf.saxon.om.AttributeMap;
 import net.sf.saxon.om.NamespaceMap;
 import net.sf.saxon.om.NoNamespaceName;
@@ -35,14 +37,13 @@ class PackageFinder120 extends PackageFinder<PackageDetails> {
     }
 
     @Override
-    public PackageDetails find(URL packageUrl, String systemId) throws IOException {
+    public PackageDetails find(URL packageUrl, String systemId, String resourcePath) throws IOException {
         PackageInspector inspector = new PackageInspector(config.makePipelineConfiguration());
-
         try {
             ParseOptions options = new ParseOptions();
             options.withDTDValidationMode(4);
             options.withSchemaValidationMode(4);
-            Sender.send(new StreamSource(packageUrl.openStream(), systemId), inspector, new ParseOptions());
+            Sender.send(new StreamSource(packageUrl.openStream(), "cp:" + resourcePath), inspector, new ParseOptions());
         } catch (XPathException e) {
             if (!e.getMessage().equals("#start#")) {
                 e.printStackTrace();
@@ -57,7 +58,7 @@ class PackageFinder120 extends PackageFinder<PackageDetails> {
             PackageDetails details = new PackageDetails();
             details.nameAndVersion = vp;
 
-            details.sourceLocation = new StreamSource(packageUrl.openStream(), systemId);
+            details.sourceLocation = new StreamSource(packageUrl.openStream(), "cp:" + resourcePath);
 
             return details;
         }

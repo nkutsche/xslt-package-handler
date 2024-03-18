@@ -63,7 +63,7 @@ public abstract class PackageFinder<P> {
             if(pkgUrl == null)
                 continue;
             try {
-                packages.add(find(pkgUrl, pkgUrl.toString()));
+                packages.add(find(pkgUrl, pkgUrl.toString(), pkgpath));
             } catch (IOException e){
                 continue;
             }
@@ -71,7 +71,7 @@ public abstract class PackageFinder<P> {
         return packages;
     }
 
-    public abstract P find(URL packageUrl, String systemId) throws IOException;
+    public abstract P find(URL packageUrl, String systemId, String resourcePath) throws IOException;
 
 
 

@@ -39,14 +39,14 @@ class PackageFinder100 extends  PackageFinder<PackageDetails> {
         }
 
         @Override
-        public PackageDetails find(URL packageUrl, String systemId) throws IOException {
+        public PackageDetails find(URL packageUrl, String systemId, String resourcePath) throws IOException {
             PackageInspector inspector = new PackageInspector(config.makePipelineConfiguration());
 
             try {
                 ParseOptions options = new ParseOptions();
                 options.setDTDValidationMode(4);
                 options.setSchemaValidationMode(4);
-                Sender.send(new StreamSource(packageUrl.openStream(), systemId), inspector, new ParseOptions());
+                Sender.send(new StreamSource(packageUrl.openStream(), "cp:" + resourcePath), inspector, new ParseOptions());
             } catch (XPathException e) {
                 if (!e.getMessage().equals("#start#")) {
                     e.printStackTrace();
@@ -61,7 +61,7 @@ class PackageFinder100 extends  PackageFinder<PackageDetails> {
                 PackageDetails details = new PackageDetails();
                 details.nameAndVersion = vp;
 
-                details.sourceLocation = new StreamSource(packageUrl.openStream(), systemId);
+                details.sourceLocation = new StreamSource(packageUrl.openStream(), "cp:" + resourcePath);
 
                 return details;
             }
