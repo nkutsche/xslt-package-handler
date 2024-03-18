@@ -4,6 +4,10 @@ This project provides a Maven based framework to wrap XSLT packages in jar files
 
 ## Release notes
 
+### 2.1.1
+
+* Minor fix of an issue with parsing the Stylesheet package. 
+
 ### 2.1.0
 
 * Adds support for Saxon 12.
