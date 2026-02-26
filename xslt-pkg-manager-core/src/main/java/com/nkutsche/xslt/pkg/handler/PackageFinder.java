@@ -11,27 +11,27 @@ import java.nio.charset.StandardCharsets;
 import java.util.*;
 import java.util.stream.Collectors;
 
-public abstract class PackageFinder<P> {
+public abstract class PackageFinder {
 
     public static final String PACKAGE_INFO_PATH = "META-INF/xslt/com.nkutsche.xslt.packages";
 
     private final ClassLoader classLoader;
-    private ArrayList<P> packages = null;
+    private ArrayList<PackageInfo> packages = null;
 
     public PackageFinder(ClassLoader classLoader){
 
         this.classLoader = classLoader;
     }
 
-    public ArrayList<P> getPackages(){
+    public ArrayList<PackageInfo> getPackages(){
         if(packages == null){
             packages = search();
         }
         return new ArrayList<>(packages);
     }
 
-    private ArrayList<P> search(){
-        ArrayList<P> packageList = new ArrayList<>();
+    private ArrayList<PackageInfo> search(){
+        ArrayList<PackageInfo> packageList = new ArrayList<>();
         try {
             Enumeration<URL> packageInfos = classLoader.getResources(PACKAGE_INFO_PATH);
 
@@ -47,8 +47,8 @@ public abstract class PackageFinder<P> {
         return packageList;
     }
 
-    public ArrayList<P> find(URL srcUrl) throws IOException {
-        ArrayList<P> packages = new ArrayList<>();
+    public ArrayList<PackageInfo> find(URL srcUrl) throws IOException {
+        ArrayList<PackageInfo> packages = new ArrayList<>();
 
         if(srcUrl == null) {
             return packages;
@@ -72,7 +72,7 @@ public abstract class PackageFinder<P> {
         return packages;
     }
 
-    public abstract P find(URL packageUrl, String systemId, String resourcePath) throws IOException;
+    public abstract PackageInfo find(URL packageUrl, String systemId, String resourcePath) throws IOException;
 
 
 

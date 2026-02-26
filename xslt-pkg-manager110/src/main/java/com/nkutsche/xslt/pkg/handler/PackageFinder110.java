@@ -22,7 +22,7 @@ import javax.xml.transform.stream.StreamSource;
 import java.io.IOException;
 import java.net.URL;
 
-class PackageFinder110 extends PackageFinder<PackageDetails> {
+class PackageFinder110 extends PackageFinder {
 
     private static PackageFinder110 packageFinder = null;
 
@@ -34,7 +34,7 @@ class PackageFinder110 extends PackageFinder<PackageDetails> {
     }
 
     @Override
-    public PackageDetails find(URL packageUrl, String systemId, String resourcePath) throws IOException {
+    public PackageInfo find(URL packageUrl, String systemId, String resourcePath) throws IOException {
         PackageInspector inspector = new PackageInspector(config.makePipelineConfiguration());
 
         try {
@@ -48,18 +48,12 @@ class PackageFinder110 extends PackageFinder<PackageDetails> {
                 throw new IOException(e.getMessage());
             }
         }
-
-        VersionedPackageName vp = inspector.getNameAndVersion();
-        if (vp == null) {
-            return null;
-        } else {
-            PackageDetails details = new PackageDetails();
-            details.nameAndVersion = vp;
-
-            details.sourceLocation = new StreamSource(packageUrl.openStream(), "cp:" + resourcePath);
-
-            return details;
-        }
+        PackageInfo packageInfo = new PackageInfo();
+        packageInfo.location = packageUrl;
+        packageInfo.name = inspector.packageName;
+        packageInfo.version = inspector.packageVersion;
+        packageInfo.systemId = "cp:" + resourcePath;
+        return packageInfo;
     }
 
     private class PackageInspector extends ProxyReceiver {
@@ -118,8 +112,20 @@ class PackageFinder110 extends PackageFinder<PackageDetails> {
             packageFinder = new PackageFinder110(config);
         }
 
-        for (PackageDetails pkg: packageFinder.getPackages()) {
-            pkgLib.addPackage(pkg);
+        for (PackageInfo pkg: packageFinder.getPackages()) {
+            try {
+                pkg.verify();
+
+                PackageDetails details = new PackageDetails();
+                details.nameAndVersion = new VersionedPackageName(pkg.name, pkg.version);
+
+                details.sourceLocation = new StreamSource(pkg.location.openStream(), pkg.systemId);
+                pkgLib.addPackage(details);
+
+            } catch (IOException | XPathException e) {
+                System.err.println(e.getMessage());
+                e.printStackTrace();
+            }
         }
 
         compInfo.setPackageLibrary(pkgLib);
