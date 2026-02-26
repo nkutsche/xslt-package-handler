@@ -68,15 +68,11 @@
     some dependency of Calabash which is not on Maven Central
     -->
         <repository>
-            <id>spring</id>
-            <url>https://maven.restlet.org</url>
-            <releases>
-                <enabled>true</enabled>
-            </releases>
+            <id>data2type-nexus-public</id>
+            <url>https://repo.data2type.de/repository/maven-public/</url>
         </repository>
-
     </repositories>
-    
+
     <build>
         <plugins>
             
