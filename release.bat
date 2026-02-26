@@ -11,7 +11,7 @@ goto eof
 
 :start
 
-call mvn clean release:prepare release:perform
+call mvnw clean release:prepare release:perform
 
 
 :eof 
