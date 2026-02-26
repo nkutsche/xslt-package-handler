@@ -10,6 +10,9 @@
     <packaging>maven-plugin</packaging>
 
     <artifactId>xslt-pkg-maven-plugin</artifactId>
+    
+    <name>XSLT Package - Maven Plugin</name>
+    <description>The Maven plugin can be used to prepare distributed XSLT packages that they can be found by the XSLT Package Handler in the classpath.</description>
 
     <properties>
         <maven.compiler.source>8</maven.compiler.source>

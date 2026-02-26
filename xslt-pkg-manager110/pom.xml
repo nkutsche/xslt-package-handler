@@ -8,6 +8,9 @@
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>xslt-pkg-manager110</artifactId>
+    
+    <name>XSLT Package Handler for Saxon 11.x</name>
+    <description>This project provides an Saxon Initializer class to find XSLT Packages in the class path and add them to the Saxon configuration. It is written on the API for Saxon 11.x.</description>
 
     <properties>
         <saxon.version>11.5</saxon.version>
