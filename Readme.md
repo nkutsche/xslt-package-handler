@@ -4,6 +4,11 @@ This project provides a Maven based framework to wrap XSLT packages in jar files
 
 ## Release notes
 
+### 2.1.2
+
+* Workaround for Saxon bug [#7032](https://saxonica.plan.io/issues/7032).
+* Replaced annoying Restlet repository
+
 ### 2.1.1
 
 * Minor fix of an issue with parsing the Stylesheet package. 
